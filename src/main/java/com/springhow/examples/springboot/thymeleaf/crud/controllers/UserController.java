@@ -2,6 +2,8 @@ package com.springhow.examples.springboot.thymeleaf.crud.controllers;
 
 import com.springhow.examples.springboot.thymeleaf.crud.domain.entities.UserInfo;
 import com.springhow.examples.springboot.thymeleaf.crud.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +18,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
@@ -25,6 +28,7 @@ public class UserController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String getUsers(Model model) {
+        logger.info("Getting users from database");
         List<UserInfo> users = userService.getUsers();
         model.addAttribute("users", users);
         model.addAttribute("userInfo", new UserInfo());
@@ -34,6 +38,7 @@ public class UserController {
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public RedirectView createUser(RedirectAttributes redirectAttributes, @ModelAttribute UserInfo userInfo) {
         userService.createUser(userInfo);
+        logger.info("Adding an user");
         String message = "Created user <b>" + userInfo.getFirstName() + " " + userInfo.getLastName() + "</b> ✨.";
         RedirectView redirectView = new RedirectView("/", true);
         redirectAttributes.addFlashAttribute("userMessage", message);
@@ -42,6 +47,7 @@ public class UserController {
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public String getUser(Model model, @PathVariable("id") Integer id) {
+        logger.info("Getting an user by Id");
         UserInfo userInfo = userService.getUser(id);
         model.addAttribute("userInfo", userInfo);
         return "edit";
