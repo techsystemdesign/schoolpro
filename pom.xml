@@ -8,10 +8,10 @@
         <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.springhow.examples.springboot</groupId>
-    <artifactId>thymeleaf-crud-example</artifactId>
+    <groupId>com.tech.system</groupId>
+    <artifactId>school-pro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>thymeleaf-crud-example</name>
+    <name>school-pro</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -88,8 +88,8 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
+        <finalName> school-pro </finalName>
     </build>
 
 </project>
