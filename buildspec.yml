@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo "Entered build phase"
+      - mvn clean package
+  post_build:
+    commands:
+      - echo "Build completed successfully"
+artifacts:
+  files:
+    - target/school-pro.jar
+  discard-paths: yes
